@@ -1,12 +1,18 @@
 package com.dslist.dslist.entities;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_game")// criar a tabela
 public class Game {
     //Criar os atributos
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Column(name = "game_year")
     private Integer year;
     private String genre;
     private String platforms;
