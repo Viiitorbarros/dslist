@@ -18,8 +18,8 @@ public class GameService {
     @Autowired //Pense nele como um Instanciador:
     private GameRepository gameRepository;
     @Transactional(readOnly = true)
-    public List<GameMinDto> findAll(){
 
+    public List<GameMinDto> findAll(){
         var result = gameRepository.findAll();
         var dto = result.stream().map(x -> new GameMinDto(x)).toList();
 
