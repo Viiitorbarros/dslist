@@ -4,6 +4,7 @@ package com.dslist.dslist.service;
 import com.dslist.dslist.dto.GameDto;
 import com.dslist.dslist.dto.GameMinDto;
 import com.dslist.dslist.entities.Game;
+import com.dslist.dslist.projections.GameMinProjection;
 import com.dslist.dslist.repository.GameRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ public class GameService {
 
     @Autowired //Pense nele como um Instanciador:
     private GameRepository gameRepository;
-    @Transactional(readOnly = true)
 
+
+    @Transactional(readOnly = true)
     public List<GameMinDto> findAll(){
         var result = gameRepository.findAll();
         var dto = result.stream().map(x -> new GameMinDto(x)).toList();
@@ -36,6 +38,15 @@ public class GameService {
         }
 
     }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDto> findByList(Long listId){
+        var result = gameRepository.searchByList(listId);
+        var dto = result.stream().map(x -> new GameMinDto(x)).toList();
+        return dto;
+    }
+
+
 
 
 }
